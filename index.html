@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Marshall's To-Do List</title>
+	<link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./styles/main.css">
+</head>
+<body ng-app="ToDoApp">
+	<nav class="navbar navbar-default" ng-controller="NavCtrl">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="nav-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">To-Do App</a>
+			</div>
+			<div class="collapse navbar-collapse" >
+			<ul class="nav navbar-nav navbar-right" ng-repeat="thingy in navItems">
+				<li><a href="#">{{thingy.name}}</a></li>
+			</ul>
+				
+			</div>
+		</div>
+	</nav>
+
+
+<script src="lib/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="lib/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="lib/node_modules/angular/angular/angular.min.js"></script>
+<script src="app/app.js"></script>
+</body>
+</html>
