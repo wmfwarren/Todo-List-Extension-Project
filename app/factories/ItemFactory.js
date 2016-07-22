@@ -33,5 +33,21 @@ app.factory("ItemStorage", function(FirebaseURL, $q, $http) {
 		});
 	};
 
-	return {getItemList, postNewItem};
+	var deleteItem = function(listItemID) {
+		console.log(listItemID, "this is delete item")
+		return $q((resolve, reject) => {
+			$http.delete(
+				`${FirebaseURL}/items/${listItemID}.json`
+			)
+			.success((data) => {
+				// console.log("Data from delete", data );
+				resolve(data);
+			})
+			.error((error) => {
+				reject(error);
+			});
+		});
+	};
+
+	return {getItemList, postNewItem, deleteItem};
 });

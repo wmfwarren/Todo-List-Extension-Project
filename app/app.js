@@ -25,5 +25,13 @@ app.config(($routeProvider, FBCreds) => {
 		templateUrl: "partials/item-details.html",
 		controller: "ItemViewCtrl"
 	}).
+	when("/login", {
+		templateUrl: "partials/login.html",
+		controller: "LoginCtrl"
+	}).
+	when("/logout", {
+		templateUrl: "partials/logout.html",
+		controller: "LogoutCtrl"
+	}).
 	otherwise("/items/list");
 });
