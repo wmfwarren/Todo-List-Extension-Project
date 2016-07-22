@@ -14,7 +14,10 @@ $scope.deleteItemCall = function(item){
 	.then((itemCollection) => {
 		$scope.items = itemCollection;
 		$location.path("/items/list");
-    // $scope.$apply();
+		ItemStorage.getItemList()
+		.then((itemCollection) => {
+			$scope.items = itemCollection;
+		});
 	});
 };
 

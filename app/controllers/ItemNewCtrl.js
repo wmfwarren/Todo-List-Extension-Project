@@ -9,7 +9,7 @@ app.controller("ItemNewCtrl", function($scope, ItemStorage, $location, AuthFacto
 		location: "",
 		task: "",
 		urgency: "",
-		uid: AuthFactory.getUser()
+		uid: null
 	};
 	
 
@@ -17,6 +17,7 @@ app.controller("ItemNewCtrl", function($scope, ItemStorage, $location, AuthFacto
 		console.log("added new item", $scope.newTask);
 		ItemStorage.postNewItem($scope.newTask)
 		.then ((response) => {
+			$scope.newTask.uid = AuthFactory.getUser();
 			$location.url("/items/list");
 		});
 	}
