@@ -6,6 +6,7 @@ app.controller("LogoutCtrl", function($scope, $location, AuthFactory) {
 
 		firebase.auth().signOut().then(function() {
 		  // Sign-out successful.
+		  AuthFactory.currentUserID = null;
 		  console.log(AuthFactory.getUser(), "Logged out");
 		}, function(error) {
 		  // An error happened.

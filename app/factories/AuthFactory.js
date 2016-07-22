@@ -9,7 +9,8 @@ app.factory("AuthFactory", () => {
 		if(user) {
 			currentUserID = user.uid;
 		} else {
-			console.log("no one logged in" );
+		currentUserID = null;
+		console.log("no one logged in" );
 		}
 	});
 
