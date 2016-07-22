@@ -5,7 +5,10 @@ app.controller("LoginCtrl", function($scope, $location, AuthFactory) {
 //login function
 //logout function
 
-AuthFactory.authWithProvider()
+	$scope.login = function () {
+		console.log("authWithProvider invoked");
+
+		AuthFactory.authWithProvider()
     .then(function(result) {
       var user = result.user.uid;
       console.log("logged in user fer sure", user);
@@ -22,4 +25,5 @@ AuthFactory.authWithProvider()
       var credential = error.credential;
       // ...
     });
+  };
 })

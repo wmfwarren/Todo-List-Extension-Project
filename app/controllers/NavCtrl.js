@@ -7,6 +7,10 @@ app.controller("NavCtrl", function($scope) {
 			url: "#/logout"
 		}, 
 		{
+			name: "Login", 
+			url: "#/login"
+		}, 
+		{
 			name: "All Items",
 			url: "#/items/list"
 		}, 
