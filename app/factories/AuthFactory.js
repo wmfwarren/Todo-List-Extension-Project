@@ -26,6 +26,6 @@ app.factory("AuthFactory", () => {
 		return currentUserID;
 	}
 
-	return {getUser, isAuthenticated, authWithProvider};
+	return {getUser, isAuthenticated, authWithProvider, currentUserID};
 
 })

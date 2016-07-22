@@ -14,11 +14,11 @@
         </div>  <!-- end class="col-xs-6 col-xs-offset-3" -->
       </div>   <!-- end class="row" -->
       
-      <div ng-repeat="thingy in items | filter: searchText">
+      <div ng-repeat="thingy in items | filter: searchText | filter: userID">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-xs-1">
-              <input type="checkbox"/>
+              <input type="checkbox" ng-checked="thingy.isCompleted" ng-change="flipCompleted(thingy)" ng-model="completed">
             </div>
             <div class="col-xs-7"><a href="#/items/details/{{thingy.id}}">{{thingy.task}}</a></div>
             <div class="col-xs-2">{{thingy.dueDate}}</div>

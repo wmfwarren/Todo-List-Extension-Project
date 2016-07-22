@@ -4,6 +4,8 @@ app.controller("ItemListCtrl", function($scope, ItemStorage, $location, AuthFact
 
 //must call it items still for iteration in the partial
 	
+	$scope.userID = AuthFactory.getUser();
+
 	if(AuthFactory.isAuthenticated()){
 		ItemStorage.getItemList()
 		.then((itemCollection) => {
@@ -13,7 +15,19 @@ app.controller("ItemListCtrl", function($scope, ItemStorage, $location, AuthFact
 		// alert("Please Log In");
 	}
 
-$scope.deleteItemCall = function(item){
+$scope.flipCompleted = function(item) {
+	console.log("item", item );
+	if (item.isCompleted === true){
+		item.isCompleted = false;
+		ItemStorage.putIsCompleted(item);
+	} else {
+		item.isCompleted = true;
+		ItemStorage.putIsCompleted(item);
+
+	}
+}
+
+$scope.deleteItemCall = function(item) {
 	ItemStorage.deleteItem(item)
 	.then((itemCollection) => {
 		$scope.items = itemCollection;
