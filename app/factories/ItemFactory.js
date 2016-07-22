@@ -1,10 +1,23 @@
 "use strict";
 app.factory("ItemStorage", function(FirebaseURL, $q, $http, AuthFactory) {
 
+	var putIsCompleted = function(item) {
+		return $q((resolve, reject) => {
+			$http.put(`${FirebaseURL}/items/${item.id}.json`, item)
+			.success((data) => {
+				// console.log("Data from delete", data );
+				resolve(data);
+			})
+			.error((error) => {
+				reject(error);
+			});
+		})
+	}
+
 	var getItemList = function() {
 		let items = [];
 		return $q((resolve, reject) => {
-			$http.get(`${FirebaseURL}/items.json?orderByKey="uid"&equalTo"${AuthFactory.getUser()}"`)
+			$http.get(`${FirebaseURL}/items.json?orderBy="uid"&equalTo"${AuthFactory.currentUserID}"`)
 			.success((itemObject) => {
 				let itemCollection = itemObject;
 				Object.keys(itemCollection).forEach((key) => {
@@ -49,5 +62,5 @@ app.factory("ItemStorage", function(FirebaseURL, $q, $http, AuthFactory) {
 		});
 	};
 
-	return {getItemList, postNewItem, deleteItem};
+	return {getItemList, postNewItem, deleteItem, putIsCompleted};
 });
