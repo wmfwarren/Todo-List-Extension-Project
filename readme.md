@@ -1,3 +1,3 @@
-#Live Code Angular To Do List
-###Nashville Software School 
+# Live Code Angular To Do List
+### Nashville Software School 
 
