@@ -1,44 +1,36 @@
 "use strict";
-app.factory("ItemStorage", function() {
-var items = [
-		{
-		 id: 0,
-		 task: "kill the Batman",
-		 isCompleted: false,
-		 dueDate: "12/5/17",
-		 assignedTo: "Joker",
-		 location: "Gotham",
-		 urgency: "urgent",
-		 dependencies: "sunshine, clippers, hat, water, headphones"
-		},
-		{
-		 id: 1,
-		 task: "kill all humans",
-		 isCompleted: false,
-		 dueDate: "12/5/3001",
-		 assignedTo: "Bender",
-		 location: "Universe",
-		 urgency: "Low",
-		 dependencies: "wifi, tissues, vodka"
-		},
-		{
-		 id: 2,
-		 task: "Vengeance for Zul'jin",
-		 isCompleted: false,
-		 dueDate: "5/21/16",
-		 assignedTo: "Zul'jin",
-		 location: "Kalimdor",
-		 urgency: "medium",
-		 dependencies: "hammock, cat, pillow, blanket"
-		}
-	];
+app.factory("ItemStorage", function(FirebaseURL, $q, $http) {
 
 	var getItemList = function() {
-		return items;
+		let items = [];
+		return $q((resolve, rejcet) => {
+			$http.get(`${FirebaseURL}/items.json`)
+			.success((itemObject) => {
+				let itemCollection = itemObject;
+				Object.keys(itemCollection).forEach((key) => {
+					itemCollection[key].id = key;
+					items.push(itemCollection[key]);
+				});
+				resolve(items);
+			})
+			.error((error) => {
+				reject(error);
+			});
+		});
 	};
 
 	var postNewItem = function(newItem) {
-		items.push(newItem);
+		return $q((resolve, reject) => {
+			$http.post(
+				`${FirebaseURL}/items.json`,
+				JSON.stringify(newItem))
+			.success((objFromFirebase) => {
+				resolve(objFromFirebase);
+			})
+			.error((error) => {
+				reject(error);
+			});
+		});
 	};
 
 	return {getItemList, postNewItem};
